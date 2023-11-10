@@ -1,10 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
-function Card({value}: { value: number }) {
-  return <button className="card">{value}</button>
-}
+import Card from './components/Card'
 
 function Board() {
   return (
