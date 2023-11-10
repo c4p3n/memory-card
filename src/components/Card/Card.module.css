@@ -17,8 +17,8 @@
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.card:hover .card-inner {
+/* Do an horizontal flip when card-flip is added to the className */
+.card-flip .card-inner {
   transform: rotateY(180deg);
 }
 
