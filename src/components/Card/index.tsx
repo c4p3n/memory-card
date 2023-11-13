@@ -20,12 +20,9 @@ function Card({value}: { value: number }) {
     <div className={cardClass} onClick={onCardClick}>
       <div className={styles['card-inner']}>
         <div className={styles['card-front']}>
-          {value}
         </div>
         <div className={styles['card-back']}>
-          <h1>John Doe</h1>
-          <p>Architect & Engineer</p>
-          <p>We love that guy</p>
+          {value}
         </div>
       </div>
     </div> 
