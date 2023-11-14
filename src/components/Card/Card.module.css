@@ -43,3 +43,9 @@
   color: white;
   transform: rotateY(180deg);
 } 
+
+/* Hide and disable a matched card */
+.card-matched {
+  pointer-events: none;
+  visibility: hidden;
+}

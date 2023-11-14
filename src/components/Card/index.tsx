@@ -1,23 +1,34 @@
 
-import { useState } from 'react';
 import styles from './Card.module.css';
 
-function Card({value}: { value: number }) {
-  const [cardClass, setCardClass] = useState(styles.card);
-  // if the card is not flipped, it will have styles.card as its class
-  const isCardFlipped = cardClass === styles.card ? false : true;
+export enum Status {
+  Unflipped,
+  Flipped,
+  Matched
+};
 
-  function onCardClick() {
-    if (!isCardFlipped) {
-      setCardClass(styles.card + " " + styles['card-flip']);
+export interface CardProps {
+  value: number;
+  status: Status;
+  onFlip: () => void;
+};
+
+function Card({ value, status, onFlip }: CardProps) {
+  function makeCardClass(status: Status) {
+    if (status === Status.Matched) {
+      return styles.card + " " + styles['card-matched'];
+    } else if (status === Status.Flipped) {
+      return styles.card + " " + styles['card-flip'];
     } else {
-      setCardClass(styles.card);
+      return styles.card;
     }
   }
 
+  const cardClass = makeCardClass(status);
+
   return (
   <>
-    <div className={cardClass} onClick={onCardClick}>
+    <div className={cardClass} onClick={onFlip}>
       <div className={styles['card-inner']}>
         <div className={styles['card-front']}>
         </div>
