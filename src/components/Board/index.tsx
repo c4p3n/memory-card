@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CardProps } from '../Card';
 import Card from '../Card';
 import { Status } from '../Card';
+import styles from './Board.module.css';
 
 function Board() {
   const cardArray: CardProps[] = [
@@ -93,7 +94,7 @@ function Board() {
   const board = makeBoard();
 
   return (
-      <div className="board-row">
+      <div className={styles['board-wrapper']}>
         {board}
       </div>
   )

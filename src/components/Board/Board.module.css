@@ -1,0 +1,5 @@
+.board-wrapper {
+  display: grid;
+  grid-template-columns: 20em 20em 20em;
+  justify-content: center;
+}
