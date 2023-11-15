@@ -5,12 +5,12 @@ import { Status } from '../Card';
 
 function Board() {
   const cardArray: CardProps[] = [
-    {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(0)},
-    {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(1)},
-    {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(2)},
-    {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(3)},
-    {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(4)},
-    {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(5)},
+    {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(0), onFlipEnd: () => handlePlay(0)},
+    {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(1), onFlipEnd: () => handlePlay(1)},
+    {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(2), onFlipEnd: () => handlePlay(2)},
+    {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(3), onFlipEnd: () => handlePlay(3)},
+    {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(4), onFlipEnd: () => handlePlay(4)},
+    {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(5), onFlipEnd: () => handlePlay(5)},
   ]
 
   const [currentCards, setCurrentCards] = useState<CardProps[]>(cardArray);
@@ -25,7 +25,6 @@ function Board() {
     }
     // set the card state to reflect the affected card
     setCurrentCards(nextCards);
-    handlePlay(index);
   }
 
   function handlePlay(lastCardClicked: number) {
@@ -57,15 +56,13 @@ function Board() {
     setCurrentCards(nextCards);
   }
 
-   // TODO: If the second card is not a match both cards should flip back over automatically with animation
-
   function handleNoMatch() {
     // create a copy of the current cards
     const nextCards = currentCards.slice();
     // filter out the cards that are flipped
     const flippedCards = nextCards.filter((card) => card.status === Status.Flipped);
     // if there is more than one flipped card, they should be flipped back
-    if (flippedCards.length > 2) {
+    if (flippedCards.length === 2) {
       flippedCards.forEach((card) => {
         if (card.status === Status.Flipped) {
           card.status = Status.Unflipped;
@@ -82,6 +79,7 @@ function Board() {
         value={currentCards[i].value} 
         status={currentCards[i].status} 
         onFlip={currentCards[i].onFlip}
+        onFlipEnd={currentCards[i].onFlipEnd}
         key={i}
         />)
     }
