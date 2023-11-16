@@ -1,5 +1,19 @@
-.board-wrapper {
-  display: grid;
-  grid-template-columns: 20em 20em 20em;
+.board-wrapper { 
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  width: 33%;
 }
+
+@media (max-width: 2000px) {
+  .board-wrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .board-wrapper {
+    width: 80%;
+  }
+}
+

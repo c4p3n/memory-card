@@ -12,6 +12,8 @@ function Board() {
     {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(3), onFlipEnd: () => handlePlay(3)},
     {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(4), onFlipEnd: () => handlePlay(4)},
     {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(5), onFlipEnd: () => handlePlay(5)},
+    {value: 4, status: Status.Unflipped, onFlip: () => handleCardClick(6), onFlipEnd: () => handlePlay(6)},
+    {value: 4, status: Status.Unflipped, onFlip: () => handleCardClick(7), onFlipEnd: () => handlePlay(7)},
   ]
 
   const [currentCards, setCurrentCards] = useState<CardProps[]>(cardArray);
@@ -76,13 +78,15 @@ function Board() {
   function makeBoard() {
     let cards = [];
     for (let i = 0; i < cardArray.length; i++) {
-      cards.push(<Card 
-        value={currentCards[i].value} 
-        status={currentCards[i].status} 
-        onFlip={currentCards[i].onFlip}
-        onFlipEnd={currentCards[i].onFlipEnd}
-        key={i}
-        />)
+      cards.push(
+      <Card 
+      value={currentCards[i].value} 
+      status={currentCards[i].status} 
+      onFlip={currentCards[i].onFlip}
+      onFlipEnd={currentCards[i].onFlipEnd}
+      key={i}
+      />
+      )
     }
     return (
       <>
