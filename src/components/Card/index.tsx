@@ -8,7 +8,7 @@ export enum Status {
 };
 
 export interface CardProps {
-  value: number;
+  value: string;
   status: Status;
   onFlip: () => void;
   onFlipEnd: () => void;
@@ -34,7 +34,7 @@ function Card({ value, status, onFlip, onFlipEnd }: CardProps) {
         <div className={styles['card-front']}>
         </div>
         <div className={styles['card-back']}>
-          {value}
+          <img src={value} alt="A good boy" height="300px" width="200px" />
         </div>
       </div>
     </div> 

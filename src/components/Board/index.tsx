@@ -3,17 +3,18 @@ import { CardProps } from '../Card';
 import Card from '../Card';
 import { Status } from '../Card';
 import styles from './Board.module.css';
+import { Picture } from '../../App';
 
-function Board() {
+function Board({pictures}: {pictures:Picture[]}) {
   const cardArray: CardProps[] = [
-    {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(0), onFlipEnd: () => handlePlay(0)},
-    {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(1), onFlipEnd: () => handlePlay(1)},
-    {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(2), onFlipEnd: () => handlePlay(2)},
-    {value: 1, status: Status.Unflipped, onFlip: () => handleCardClick(3), onFlipEnd: () => handlePlay(3)},
-    {value: 3, status: Status.Unflipped, onFlip: () => handleCardClick(4), onFlipEnd: () => handlePlay(4)},
-    {value: 2, status: Status.Unflipped, onFlip: () => handleCardClick(5), onFlipEnd: () => handlePlay(5)},
-    {value: 4, status: Status.Unflipped, onFlip: () => handleCardClick(6), onFlipEnd: () => handlePlay(6)},
-    {value: 4, status: Status.Unflipped, onFlip: () => handleCardClick(7), onFlipEnd: () => handlePlay(7)},
+    {value: pictures[0].url, status: Status.Unflipped, onFlip: () => handleCardClick(0), onFlipEnd: () => handlePlay(0)},
+    {value: pictures[1].url, status: Status.Unflipped, onFlip: () => handleCardClick(1), onFlipEnd: () => handlePlay(1)},
+    {value: pictures[2].url, status: Status.Unflipped, onFlip: () => handleCardClick(2), onFlipEnd: () => handlePlay(2)},
+    {value: pictures[3].url, status: Status.Unflipped, onFlip: () => handleCardClick(3), onFlipEnd: () => handlePlay(3)},
+    {value: pictures[4].url, status: Status.Unflipped, onFlip: () => handleCardClick(4), onFlipEnd: () => handlePlay(4)},
+    {value: pictures[5].url, status: Status.Unflipped, onFlip: () => handleCardClick(5), onFlipEnd: () => handlePlay(5)},
+    {value: pictures[6].url, status: Status.Unflipped, onFlip: () => handleCardClick(6), onFlipEnd: () => handlePlay(6)},
+    {value: pictures[7].url, status: Status.Unflipped, onFlip: () => handleCardClick(7), onFlipEnd: () => handlePlay(7)},
   ]
 
   const [currentCards, setCurrentCards] = useState<CardProps[]>(cardArray);
