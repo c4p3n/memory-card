@@ -1,22 +1,48 @@
 import { useState } from 'react';
 import { CardProps } from '../Card';
-import Card from '../Card';
 import { Status } from '../Card';
-import styles from './Board.module.css';
 import { Picture } from '../../App';
+import styles from './Board.module.css';
+import Card from '../Card';
 
-function Board({pictures}: {pictures:Picture[]}) {
-  const cardArray: CardProps[] = [
-    {value: pictures[0].url, status: Status.Unflipped, onFlip: () => handleCardClick(0), onFlipEnd: () => handlePlay(0)},
-    {value: pictures[1].url, status: Status.Unflipped, onFlip: () => handleCardClick(1), onFlipEnd: () => handlePlay(1)},
-    {value: pictures[2].url, status: Status.Unflipped, onFlip: () => handleCardClick(2), onFlipEnd: () => handlePlay(2)},
-    {value: pictures[3].url, status: Status.Unflipped, onFlip: () => handleCardClick(3), onFlipEnd: () => handlePlay(3)},
-    {value: pictures[4].url, status: Status.Unflipped, onFlip: () => handleCardClick(4), onFlipEnd: () => handlePlay(4)},
-    {value: pictures[5].url, status: Status.Unflipped, onFlip: () => handleCardClick(5), onFlipEnd: () => handlePlay(5)},
-    {value: pictures[6].url, status: Status.Unflipped, onFlip: () => handleCardClick(6), onFlipEnd: () => handlePlay(6)},
-    {value: pictures[7].url, status: Status.Unflipped, onFlip: () => handleCardClick(7), onFlipEnd: () => handlePlay(7)},
-  ]
+interface BoardProps {
+  pictures: Picture[];
+  numberOfCards: number
+}
 
+function Board({pictures, numberOfCards}: BoardProps) {
+  const cardArray: CardProps[] = []
+  const indices: number[] = [];
+
+  // create an array of indices that will be used to shuffle the array of cards
+  for (let i = 0; i < numberOfCards; i++) {
+    indices.push(i);
+  }
+
+  // shuffle the indices array so it can be used to place the cards at random places
+  shuffleArray(indices);
+
+  // Add cards 2 at a time to ensure each card has a match
+  for (let i = 0; i < numberOfCards; i += 2) {
+    let [randomIndex1, randomIndex2] = [indices[i], indices[i+1]];
+    let card1: CardProps = {
+      value: pictures[i].url,
+      status: Status.Unflipped,
+      onFlip: () => handleCardClick(randomIndex1),
+      onFlipEnd: () => handlePlay(randomIndex1),
+    }
+
+    let card2: CardProps = {
+      value: pictures[i].url, // this stays the same to ensure there is a matching picture
+      status: Status.Unflipped,
+      onFlip: () => handleCardClick(randomIndex2),
+      onFlipEnd: () => handlePlay(randomIndex2),
+    }
+
+    cardArray[randomIndex1] = card1;
+    cardArray[randomIndex2] = card2;
+  }
+  
   const [currentCards, setCurrentCards] = useState<CardProps[]>(cardArray);
   
   function handleCardClick(index: number) {
@@ -106,6 +132,14 @@ function Board({pictures}: {pictures:Picture[]}) {
 
 }
 
-
+// Shuffle the elements in an array
+function shuffleArray(array: any[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    // generates a random number that is still less than the highest array index
+    const j = Math.floor(Math.random() * (i + 1));
+    // this uses destructuring to take the element at array[j] and assign it to array[i], and vice versa
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
 
 export default Board;

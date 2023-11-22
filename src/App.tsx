@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <Board pictures={pictures} />
+      <Board pictures={pictures} numberOfCards={8} />
     </div>
   );
 }

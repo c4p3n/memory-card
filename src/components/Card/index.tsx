@@ -27,6 +27,7 @@ function Card({ value, status, onFlip, onFlipEnd }: CardProps) {
 
   const cardClass = makeCardClass(status);
 
+  // TODO: Change the hardcoded height and width, and alt-text
   return (
   <>
     <div className={cardClass} onClick={onFlip}>
@@ -34,7 +35,7 @@ function Card({ value, status, onFlip, onFlipEnd }: CardProps) {
         <div className={styles['card-front']}>
         </div>
         <div className={styles['card-back']}>
-          <img src={value} alt="A good boy" height="300px" width="200px" />
+          <img src={value} alt="A good boy" height="300px" width="200px" /> 
         </div>
       </div>
     </div> 
