@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css';
 import Board from './components/Board';
+import Timer from './components/Timer';
 import axios from 'axios';
 
 export interface Picture {
@@ -28,9 +29,12 @@ function App() {
   }
 
   return (
+    <>
     <div className="App">
+      <Timer />
       <Board pictures={pictures} numberOfCards={8} />
     </div>
+    </>
   );
 }
 
