@@ -7,10 +7,11 @@ import Card from '../Card';
 
 interface BoardProps {
   pictures: Picture[];
-  numberOfCards: number
+  numberOfCards: number;
+  time: number
 }
 
-function Board({pictures, numberOfCards}: BoardProps) {
+function Board({pictures, numberOfCards, time}: BoardProps) {
   const cardArray: CardProps[] = []
   const indices: number[] = [];
 
@@ -124,8 +125,9 @@ function Board({pictures, numberOfCards}: BoardProps) {
 
   const board = makeBoard();
 
+  // When time runs out, disable clicking on the board
   return (
-      <div className={styles['board-wrapper']}>
+      <div className={time > 0 ? styles['board-wrapper'] : styles['board-wrapper'] + " " + styles['is-disabled']}>
         {board}
       </div>
   )

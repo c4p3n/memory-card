@@ -17,3 +17,7 @@
   }
 }
 
+div.is-disabled {
+  pointer-events: none;
+}
+
