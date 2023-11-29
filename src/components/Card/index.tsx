@@ -8,7 +8,7 @@ export enum Status {
 };
 
 export interface CardProps {
-  value: string;
+  value: string
   status: Status;
   onFlip: () => void;
   onFlipEnd: () => void;
