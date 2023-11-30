@@ -1,0 +1,18 @@
+.game-wrapper { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 33%;
+}
+
+@media (max-width: 2000px) {
+  .game-wrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .game-wrapper {
+    width: 80%;
+  }
+}

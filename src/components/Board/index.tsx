@@ -4,9 +4,10 @@ import Card from '../Card';
 
 interface BoardProps {
   currentCards: CardProps[],
+  time: number
 }
 
-function Board({currentCards}: BoardProps) {
+function Board({currentCards, time}: BoardProps) {
 
   function makeBoard() {
     let cards = [];
@@ -32,7 +33,7 @@ function Board({currentCards}: BoardProps) {
 
   // When time runs out, disable clicking on the board
   return (
-      <div className={styles['board-wrapper']}>
+    <div className={time > 0 ? styles['board-wrapper'] : styles['board-wrapper'] + " " + styles['is-disabled']}>
         {board}
       </div>
   )

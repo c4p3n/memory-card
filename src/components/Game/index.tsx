@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Picture } from '../../App';
 import Board from '../Board';
 import { CardProps, Status } from '../Card';
 import Timer from '../Timer';
+import styles from './Game.module.css';
 
 export interface GameProps {
   pictures: Picture[]
 }
 
 function Game({pictures}: GameProps) {
-
+  const [timeRemaining, setTimeRemaining] = useState<number>(30);
   const cardArray: CardProps[] = []
   const indices: number[] = [];
   const numberOfCards: number = 8;
@@ -45,6 +46,21 @@ function Game({pictures}: GameProps) {
 
   const [currentCards, setCurrentCards] = useState<CardProps[]>(cardArray);
   const isGameWon = currentCards.every((card) => {return card.status === Status.Matched});
+
+  useEffect(() => {
+    // stop timer if the game is won
+    if (!isGameWon) {
+      const timer = setTimeout(() => {
+        // Here I use the functional update form of setState. This seems to be generally safer
+        // since it does not use timeRemaining directly
+        // https://legacy.reactjs.org/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often
+        setTimeRemaining(prevTime => prevTime - 1)
+      }, 1000);
+  
+      return () => clearTimeout(timer);
+    }
+  }, [timeRemaining, isGameWon]); // adding this made it so that the timer did not pause during the card flip transition
+  // WHY?
 
   function handleCardClick(index: number) {
     // make a copy of the card array
@@ -105,9 +121,9 @@ function Game({pictures}: GameProps) {
 
   return (
     <>
-    <div className="Game">
-      <Timer isGameWon={isGameWon} />
-      <Board currentCards={currentCards} />
+    <div className={styles['game-wrapper']}>
+      <Timer time={timeRemaining} />
+      <Board currentCards={currentCards} time={timeRemaining} />
     </div>
     </>
   )

@@ -1,20 +1,7 @@
-.board-wrapper { 
+.board-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 33%;
-}
-
-@media (max-width: 2000px) {
-  .board-wrapper {
-    width: 50%;
-  }
-}
-
-@media (max-width: 1000px) {
-  .board-wrapper {
-    width: 80%;
-  }
 }
 
 div.is-disabled {
