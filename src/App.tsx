@@ -28,11 +28,9 @@ function App() {
   }
 
   return (
-    <>
     <div className="App">
       <Game pictures={pictures} />
     </div>
-    </>
   );
 }
 
